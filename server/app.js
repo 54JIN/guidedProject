@@ -14,7 +14,7 @@ const dbName = 'swapi';
 
 app.use(express.json());
 
-//Routes
+//Configuring Routes
 app.use(charactersRouter);
 app.use(filmsRouter);
 app.use(planetsRouter);

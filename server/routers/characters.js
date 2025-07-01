@@ -34,4 +34,7 @@ charactersRouter.get('/api/characters/:id', async (req, res) => {
     }
 });
 
+
+//"/api/characters/:id/films"
+
 export default charactersRouter;

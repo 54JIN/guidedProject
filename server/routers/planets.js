@@ -17,4 +17,21 @@ planetsRouter.get('/api/planets', async (req, res) => {
     }
 });
 
+//"/api/planets/:id"
+
+planetsRouter.get('/api/planets/:id/characters', async (req, res) => {
+    const { id } = req.params; 
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const characters = await db.collection('characters').find({ homeworld: parseInt(id) }).toArray();
+        res.json(characters); 
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Getting characters failed! ☹️");
+    }
+});
+
+//"/api/planets/:id/films"
+
 export default planetsRouter;

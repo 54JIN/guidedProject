@@ -17,4 +17,15 @@ filmsRouter.get('/api/films', async (req, res) => {
     }
 });
 
+//"/api/films/:id"
+
+
+//"/api/films/:id/characters"
+
+
+
+//"/api/films/:id/planets"
+
+
+
 export default filmsRouter;
