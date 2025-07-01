@@ -35,6 +35,21 @@ charactersRouter.get('/api/characters/:id', async (req, res) => {
 });
 
 
-//"/api/characters/:id/films"
+charactersRouter.get('/api/characters/:id/films', async (req, res) => {
+    const characterId = req.params.id;
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('films_characters');
+        const character = await collection.findOne({ character_id: parseInt(characterId) });
+        if (!character) {
+            return res.status(404).send("Character not found!");
+        }
+        res.json(character);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Getting character failed! ☹");
+    }
+});
 
 export default charactersRouter;

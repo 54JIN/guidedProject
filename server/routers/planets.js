@@ -17,7 +17,19 @@ planetsRouter.get('/api/planets', async (req, res) => {
     }
 });
 
-//"/api/planets/:id"
+planetsRouter.get('/api/planets/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('planets');
+        const planets = await collection.find({ id: parseInt(id)}).toArray();
+        res.json(planets);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Getting planets failed! ☹");
+    }
+});
 
 planetsRouter.get('/api/planets/:id/characters', async (req, res) => {
     const { id } = req.params; 
@@ -32,6 +44,17 @@ planetsRouter.get('/api/planets/:id/characters', async (req, res) => {
     }
 });
 
-//"/api/planets/:id/films"
+planetsRouter.get('/api/planets/:id/films', async (req, res) => {
+    const { id } = req.params; 
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const characters = await db.collection('films_planets').find({ planet_id: parseInt(id) }).toArray();
+        res.json(characters); 
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Getting characters failed! ☹️");
+    }
+});
 
 export default planetsRouter;

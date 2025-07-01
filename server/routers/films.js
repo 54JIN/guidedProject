@@ -17,15 +17,50 @@ filmsRouter.get('/api/films', async (req, res) => {
     }
 });
 
-//"/api/films/:id"
+filmsRouter.get('/api/films/:id', async (req, res) => {
+    const { id } = req.params
 
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('films');
+        const films = await collection.find({ id: parseInt( id )}).toArray();
+        res.json(films);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Getting films failed! ☹");
+    }
+});
 
-//"/api/films/:id/characters"
+filmsRouter.get('/api/films/:id/characters', async (req, res) => {
+    const { id } = req.params
 
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('films_characters');
+        const films = await collection.find({ film_id: parseInt( id )}).toArray();
+        res.json(films);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Getting films failed! ☹");
+    }
+});
 
+filmsRouter.get('/api/films/:id/planets', async (req, res) => {
+    const { id } = req.params
 
-//"/api/films/:id/planets"
-
+    try {
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection('films_planets');
+        const films = await collection.find({ film_id: parseInt( id )}).toArray();
+        res.json(films);
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).send("Getting films failed! ☹");
+    }
+});
 
 
 export default filmsRouter;
