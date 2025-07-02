@@ -28,7 +28,7 @@ const HomePage = () => {
     // .catch((error) => console.error('Error:', error));
 
     return (
-        <div>
+        <div className="HomePage">
             {characters.map(character => <LittleBox key = {character.id} title = {character.name} page='character' id={character.id} />)}
         </div>
     );
