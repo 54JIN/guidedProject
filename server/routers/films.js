@@ -24,7 +24,7 @@ filmsRouter.get('/api/films/:id', async (req, res) => {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('films');
-        const films = await collection.find({ id: parseInt( id )}).toArray();
+        const films = await collection.findOne({ id: parseInt( id )});
         res.json(films);
     } catch (err) {
         console.error("Error:", err);

@@ -41,7 +41,7 @@ charactersRouter.get('/api/characters/:id/films', async (req, res) => {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('films_characters');
-        const character = await collection.findOne({ character_id: parseInt(characterId) });
+        const character = await collection.find({ character_id: parseInt(characterId) }).toArray();
         if (!character) {
             return res.status(404).send("Character not found!");
         }

@@ -19,9 +19,9 @@ function App() {
             <div className="row">
               <Routes>
                   <Route exact path="/" element={<HomePage />} />
-                  <Route exact path="/character" element={<CharactersPage />} />
-                  <Route exact path="/film" element={<FilmsPage />} />
-                  <Route exact path="/planet" element={<PlanetsPage />} />
+                  <Route exact path="/character/:id" element={<CharactersPage />} />
+                  <Route exact path="/film/:id" element={<FilmsPage />} />
+                  <Route exact path="/planet/:id" element={<PlanetsPage />} />
                   {/* <Route path="/Login" element={<LoginForm />} /> */}
               </Routes>
             </div>

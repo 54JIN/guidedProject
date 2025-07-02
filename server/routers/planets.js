@@ -23,7 +23,7 @@ planetsRouter.get('/api/planets/:id', async (req, res) => {
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection('planets');
-        const planets = await collection.find({ id: parseInt(id)}).toArray();
+        const planets = await collection.findOne({ id: parseInt(id)});
         res.json(planets);
     } catch (err) {
         console.error("Error:", err);
